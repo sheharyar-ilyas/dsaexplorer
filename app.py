@@ -4,8 +4,15 @@ import random
 import copy
 import pandas as pd
 
+st.logo(
+    "icon.png",        
+    size="large",                  
+    link="https://dsaexplorer.streamlit.app",  
+    icon_image="icon.png",  
+)
+
 # Set page configurations
-st.set_page_config(layout="wide", page_title="CS200 Algorithm Analyzer")
+st.set_page_config(layout="wide", page_title="DSA Explorer",page_icon="icon.png")
 st.title("📊 CS200 - Sorting Algorithm Benchmark Dashboard")
 
 # ---------------------------------------------------------
