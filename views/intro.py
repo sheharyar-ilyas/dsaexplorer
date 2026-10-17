@@ -45,7 +45,7 @@ try:
         st.markdown(
             """
             **Sorting Lab**
-            - 9 sorting algorithms
+            - 8 sorting algorithms
             - Time in milliseconds
             - Comparisons and swaps
             - Complexity and stability information
