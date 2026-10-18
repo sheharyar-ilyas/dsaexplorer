@@ -50,7 +50,6 @@ SLOW_ALGORITHMS = {
 st.title("Sorting Lab")
 st.caption(
     "Sort your complete dataset using different algorithms "
-    "and compare their performance."
 )
 
 try:
@@ -259,95 +258,6 @@ if "last_sort_metrics" in st.session_state:
         "Download Sorted Dataset as CSV",
         data=csv_data,
         file_name="sorted_dataset.csv",
-        mime="text/csv",
-        use_container_width=True,
-    )
-
-
-# ---------------------------------------------------------
-# 6. Multi-level sorting
-# ---------------------------------------------------------
-
-st.divider()
-st.header("Multi-Level Sorting")
-
-st.write(
-    "Choose multiple columns and their order. "
-    "The first column has the highest priority."
-)
-
-level_count = st.number_input(
-    "Number of sorting levels",
-    min_value=2,
-    max_value=len(df.columns),
-    value=min(2, len(df.columns)),
-    step=1,
-)
-
-levels = []
-
-for i in range(int(level_count)):
-    col1, col2 = st.columns([2, 1])
-
-    with col1:
-        column = st.selectbox(
-            f"Level {i + 1}: Column",
-            options=list(df.columns),
-            key=f"multi_column_{i}",
-        )
-
-    with col2:
-        direction = st.selectbox(
-            f"Level {i + 1}: Order",
-            options=["Ascending", "Descending"],
-            key=f"multi_order_{i}",
-        )
-
-    levels.append((column, direction == "Ascending"))
-
-
-if st.button(
-    "Apply Multi-Level Sorting",
-    type="primary",
-    use_container_width=True,
-):
-    selected_columns = [column for column, _ in levels]
-    ascending_orders = [ascending for _, ascending in levels]
-
-    if len(set(selected_columns)) != len(selected_columns):
-        st.error("Please select a different column for each level.")
-
-    else:
-        try:
-            multi_sorted_df = df.sort_values(
-                by=selected_columns,
-                ascending=ascending_orders,
-                na_position="last",
-            ).reset_index(drop=True)
-
-            st.session_state["multi_sorted_result"] = multi_sorted_df
-
-        except (ValueError, TypeError) as error:
-            st.error(f"Multi-level sorting failed: {error}")
-
-
-if "multi_sorted_result" in st.session_state:
-    st.subheader("Multi-Level Sorting Result")
-
-    st.dataframe(
-        st.session_state["multi_sorted_result"],
-        use_container_width=True,
-        height=450,
-    )
-
-    multi_csv = st.session_state["multi_sorted_result"].to_csv(
-        index=False
-    ).encode("utf-8")
-
-    st.download_button(
-        "Download Multi-Level Sorted Dataset",
-        data=multi_csv,
-        file_name="multi_sorted_dataset.csv",
         mime="text/csv",
         use_container_width=True,
     )

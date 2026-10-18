@@ -16,6 +16,7 @@ pages = [
     st.Page("views/intro.py", title="Home", icon=":material/home:", default=True),
     st.Page("views/explorer.py", title="Search & Filter", icon=":material/search:"),
     st.Page("views/sorting.py", title="Sorting Lab", icon=":material/sort:"),
+    st.Page("views/multi_sort.py", title="Multisorting Lab", icon=":material/layers:"),
     st.Page("views/benchmark.py", title="Benchmark", icon=":material/speed:"),
 ]
 st.navigation(pages).run()
